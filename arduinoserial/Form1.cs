@@ -78,7 +78,6 @@ namespace arduinoserial
             }
             catch (Exception err)
             {
-
                 MessageBox.Show(err.Message,"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -89,7 +88,7 @@ namespace arduinoserial
             {
                 timer1.Enabled = false;
                 serialPort1.Close();
-                //label6.Text = "";
+               
             }
         }
         private void Timer1_Tick(object sender, EventArgs e)
@@ -129,13 +128,44 @@ namespace arduinoserial
 
         private void BackgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-
+            while (true)
+            {
+                Thread.Sleep(100);
+                String dataku = serialPort1.ReadLine().ToString();
+                kanan = Convert.ToInt32(dataku) - 40;
+                kiri = Convert.ToInt32(dataku) + 40;
+                backgroundWorker1.ReportProgress(Convert.ToInt32(dataku));
+            }
             
         }
 
         private void BackgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
+            int dataku = e.ProgressPercentage;
+            kanan = dataku - 40;
+            kiri = dataku + 40;
+            if (datab < kanan)
+            {
+                label8.Text = "Kanan";
+            }
+            if (datab > kiri)
+            {
+                label8.Text = "Kiri";
+            }
+            //label8.Text = kanan.ToString();
+            label6.Text = dataku.ToString();
+            chart1.Series["Suhu"].Points.AddY(dataku);
+            chart1.Series["Suhu"].Points.RemoveAt(0);
+            chart1.ChartAreas[0].AxisX.MajorGrid.IntervalOffset = -GridlinesOffset;
 
+            //Calculate Next Offset
+            GridlinesOffset++;
+            GridlinesOffset %= (int)chart1.ChartAreas[0].AxisX.MajorGrid.Interval;
+            SQLiteCommand sqlite_cmd;
+            sqlite_cmd = sql_con.CreateCommand();
+            sqlite_cmd.CommandText = "INSERT INTO baca (tanggal,baca) VALUES ('" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "', '" + dataku + "')";
+            //sqlite_cmd.ExecuteNonQuery();
+            datab = dataku;
         }
 
         private void BackgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

@@ -18,3 +18,23 @@ D:\Project C# or VB\arduinoserial\arduinoserial\bin\Debug\EntityFramework.SqlSer
 D:\Project C# or VB\arduinoserial\arduinoserial\bin\Debug\System.Data.SQLite.xml
 D:\Project C# or VB\arduinoserial\arduinoserial\bin\Debug\System.Data.SQLite.dll.config
 D:\Project C# or VB\arduinoserial\arduinoserial\obj\Debug\arduinoserial.csproj.CopyComplete
+C:\Users\fahrul\Documents\Visual Studio 2019\Projects\csharp-matajuling\arduinoserial\bin\Debug\arduinoserial.exe.config
+C:\Users\fahrul\Documents\Visual Studio 2019\Projects\csharp-matajuling\arduinoserial\bin\Debug\arduinoserial.exe
+C:\Users\fahrul\Documents\Visual Studio 2019\Projects\csharp-matajuling\arduinoserial\bin\Debug\arduinoserial.pdb
+C:\Users\fahrul\Documents\Visual Studio 2019\Projects\csharp-matajuling\arduinoserial\bin\Debug\EntityFramework.dll
+C:\Users\fahrul\Documents\Visual Studio 2019\Projects\csharp-matajuling\arduinoserial\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\fahrul\Documents\Visual Studio 2019\Projects\csharp-matajuling\arduinoserial\bin\Debug\System.Data.SQLite.dll
+C:\Users\fahrul\Documents\Visual Studio 2019\Projects\csharp-matajuling\arduinoserial\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\fahrul\Documents\Visual Studio 2019\Projects\csharp-matajuling\arduinoserial\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\fahrul\Documents\Visual Studio 2019\Projects\csharp-matajuling\arduinoserial\bin\Debug\EntityFramework.xml
+C:\Users\fahrul\Documents\Visual Studio 2019\Projects\csharp-matajuling\arduinoserial\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\fahrul\Documents\Visual Studio 2019\Projects\csharp-matajuling\arduinoserial\bin\Debug\System.Data.SQLite.xml
+C:\Users\fahrul\Documents\Visual Studio 2019\Projects\csharp-matajuling\arduinoserial\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\fahrul\Documents\Visual Studio 2019\Projects\csharp-matajuling\arduinoserial\obj\Debug\arduinoserial.csprojAssemblyReference.cache
+C:\Users\fahrul\Documents\Visual Studio 2019\Projects\csharp-matajuling\arduinoserial\obj\Debug\arduinoserial.Form1.resources
+C:\Users\fahrul\Documents\Visual Studio 2019\Projects\csharp-matajuling\arduinoserial\obj\Debug\arduinoserial.Properties.Resources.resources
+C:\Users\fahrul\Documents\Visual Studio 2019\Projects\csharp-matajuling\arduinoserial\obj\Debug\arduinoserial.csproj.GenerateResource.cache
+C:\Users\fahrul\Documents\Visual Studio 2019\Projects\csharp-matajuling\arduinoserial\obj\Debug\arduinoserial.csproj.CoreCompileInputs.cache
+C:\Users\fahrul\Documents\Visual Studio 2019\Projects\csharp-matajuling\arduinoserial\obj\Debug\arduinoserial.csproj.CopyComplete
+C:\Users\fahrul\Documents\Visual Studio 2019\Projects\csharp-matajuling\arduinoserial\obj\Debug\arduinoserial.exe
+C:\Users\fahrul\Documents\Visual Studio 2019\Projects\csharp-matajuling\arduinoserial\obj\Debug\arduinoserial.pdb

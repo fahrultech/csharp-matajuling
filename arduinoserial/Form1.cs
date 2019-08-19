@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Ports;
 using System.Data.SQLite;
+using System.Threading;
 namespace arduinoserial
 {
     public partial class Form1 : Form
@@ -16,12 +17,23 @@ namespace arduinoserial
         private SQLiteConnection sql_con;
         private SQLiteCommand sql_cmd;
         private SQLiteDataAdapter DB;
+        private int GridlinesOffset = 0;
+        private int kanan;
+        private int kiri;
+        private int datab;
         
         public Form1()
         {
             InitializeComponent();
             timer1.Enabled = false;
-            
+            chart1.ChartAreas[0].AxisY.Maximum = (int)numericUpDown1.Value;
+            chart1.ChartAreas[0].AxisY.Minimum = 200;
+            chart1.ChartAreas[0].AxisX.Minimum = 0;
+            chart1.ChartAreas[0].AxisX.Maximum = 60;
+            for (int i = 0; i < 60; i++)
+            {
+                chart1.Series["Suhu"].Points.AddY(0);
+            }
         }
 
         private void Chart1_Click(object sender, EventArgs e)
@@ -33,8 +45,7 @@ namespace arduinoserial
         {
             string[] ports = SerialPort.GetPortNames();
             portConfig.Items.AddRange(ports);
-            chart1.ChartAreas[0].AxisY.Maximum = 400;
-            chart1.ChartAreas[0].AxisY.Minimum = 200;
+            
             CreateConnection();
         }
         private void CreateConnection()
@@ -60,7 +71,10 @@ namespace arduinoserial
                 serialPort1.Parity = (Parity)Enum.Parse(typeof(Parity), comboParity.Text);
 
                 serialPort1.Open();
-                timer1.Enabled = true;
+                if (!backgroundWorker1.IsBusy)
+                {
+                    backgroundWorker1.RunWorkerAsync();
+                }
             }
             catch (Exception err)
             {
@@ -75,19 +89,58 @@ namespace arduinoserial
             {
                 timer1.Enabled = false;
                 serialPort1.Close();
-                label6.Text = "";
+                //label6.Text = "";
             }
         }
         private void Timer1_Tick(object sender, EventArgs e)
         {
             timer1.Interval = 100;
             String dataku = serialPort1.ReadLine().ToString();
+            kanan = Convert.ToInt32(dataku) - 40;
+            kiri = Convert.ToInt32(dataku) + 40;
+            if (datab < kanan)
+            {
+                label8.Text = "Kanan";
+            }
+            if (datab > kiri)
+            {
+                label8.Text = "Kiri";
+            }
+            //label8.Text = kanan.ToString();
             label6.Text = dataku;
             chart1.Series["Suhu"].Points.AddY(dataku);
+            chart1.Series["Suhu"].Points.RemoveAt(0);
+            chart1.ChartAreas[0].AxisX.MajorGrid.IntervalOffset = -GridlinesOffset;
+
+            //Calculate Next Offset
+            GridlinesOffset++;
+            GridlinesOffset %= (int)chart1.ChartAreas[0].AxisX.MajorGrid.Interval;
             SQLiteCommand sqlite_cmd;
             sqlite_cmd = sql_con.CreateCommand();
-            sqlite_cmd.CommandText = "INSERT INTO baca (tanggal,baca) VALUES ('"+ DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "', '" + dataku + "')";
+            sqlite_cmd.CommandText = "INSERT INTO baca (tanggal,baca) VALUES ('" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "', '" + dataku + "')";
             //sqlite_cmd.ExecuteNonQuery();
+            datab = Convert.ToInt32(dataku);
+        }
+
+        private void NumericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            chart1.ChartAreas[0].AxisY.Maximum = (int)numericUpDown1.Value;
+        }
+
+        private void BackgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+            
+        }
+
+        private void BackgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+
+        }
+
+        private void BackgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
         }
     }
 }
